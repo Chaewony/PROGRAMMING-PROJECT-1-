@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Window">
+      <UniqueIdentifier>{82d6136f-691c-473f-abbb-b595190c9fe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{a10ece0b-c9c3-4b92-accd-69b76e0bbf0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{23a41ed4-27a2-4b71-968e-b267c32b7a97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{ee20a72e-6ad2-40c9-b5a4-ab32e6320b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Loader">
+      <UniqueIdentifier>{a0a1fad2-7f4c-4657-b789-2c907494e7f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Model">
+      <UniqueIdentifier>{19edfecc-ac35-4a0e-bd55-9541f2873a57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Shader">
+      <UniqueIdentifier>{356fa469-60b6-45fc-a573-1a24456a2bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Game">
+      <UniqueIdentifier>{2be0052f-8769-4acd-b01a-c7ff06cde9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{78da4f58-7e8e-4323-a3b5-3e91f3979cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="실험">
+      <UniqueIdentifier>{2be3a6c1-e0c5-4208-91f9-72e78a42aa56}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="systemclass.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="RMModel.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinModel.cpp">
+      <Filter>Component\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseModel.cpp">
+      <Filter>Component\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoader.cpp">
+      <Filter>Utils\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Component\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="MYUTIL.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Component\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="RMShader.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="RMTexture.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="fpsclass.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="timerclass.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="cpuclass.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="fontshaderclass.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="textclass.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="fontclass.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="textureclass.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DDSTextureLoader.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="lightshaderclass.cpp">
+      <Filter>실험</Filter>
+    </ClCompile>
+    <ClCompile Include="lightclass.cpp">
+      <Filter>실험</Filter>
+    </ClCompile>
+    <ClCompile Include="modelclass.cpp">
+      <Filter>실험</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystemClass.cpp">
+      <Filter>실험</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleShaderClass.cpp">
+      <Filter>실험</Filter>
+    </ClCompile>
+    <ClCompile Include="Skybox.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Refractionshaderclass.cpp" />
+    <ClCompile Include="RenderTextureClass.cpp" />
+    <ClCompile Include="WaterShaderClass.cpp" />
+    <ClCompile Include="FogShaderClass.cpp">
+      <Filter>실험</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>_Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="systemclass.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="RMModel.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinModel.h">
+      <Filter>Component\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseModel.h">
+      <Filter>Component\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelStructure.h">
+      <Filter>Component\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h">
+      <Filter>Utils\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Component\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="MYUTIL.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Component\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="RMShader.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="RMTexture.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="AlignedAllocationPolicy.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameNode.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\shader\bufferStruct.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="cpuclass.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="fpsclass.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="timerclass.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="fontclass.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="fontshaderclass.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="textclass.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="textureclass.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DDSTextureLoader.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="lightshaderclass.h">
+      <Filter>실험</Filter>
+    </ClInclude>
+    <ClInclude Include="lightclass.h">
+      <Filter>실험</Filter>
+    </ClInclude>
+    <ClInclude Include="modelclass.h">
+      <Filter>실험</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystemClass.h">
+      <Filter>실험</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleShaderClass.h">
+      <Filter>실험</Filter>
+    </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterShaderClass.h" />
+    <ClInclude Include="Refractionshaderclass.h" />
+    <ClInclude Include="RenderTextureClass.h" />
+    <ClInclude Include="FogShaderClass.h">
+      <Filter>실험</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>_Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="source\shader\skin.ps">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\skin.vs">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\texture.ps">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\texture.vs">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\basic.ps">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\basic.vs">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\color.ps">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\color.vs">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\font.ps">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\font.vs">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\light.ps">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="source\shader\light.vs">
+      <Filter>Shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>
