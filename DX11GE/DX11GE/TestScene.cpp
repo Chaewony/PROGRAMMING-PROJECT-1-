@@ -15,7 +15,7 @@ HRESULT TestScene::Init(void)
 		m_Light = new LightClass;
 		m_Light->SetAmbientColor(0.5f, 0.5f, 0.5f, 1.0f);
 		m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-		m_Light->SetDirection(1.0f, 1.0f, 1.0f);
+		m_Light->SetDirection(0.5f, -0.8f, 0.5f);
 		m_Light->SetSpecularColor(1.0f, 1.0f, 1.0f, 1.0f);
 		m_Light->SetSpecularPower(32.0f);
 
@@ -130,6 +130,13 @@ HRESULT TestScene::Init(void)
 		m_waterHeight = 2.75f;
 		// Initialize the position of the water.
 		m_waterTranslation = 0.0f;
+
+		m_OutlineShader = new OutlineShaderClass;
+		if (!m_OutlineShader->Initialize(device, _hWnd))
+		{
+			MessageBox(_hWnd, L"Could not initialize the light shader object.", L"Error", MB_OK);
+			return false;
+		}
 	}
 	
 	//model - another floating island for fog effect
@@ -246,7 +253,6 @@ void TestScene::Update(void)
 
 void TestScene::Render(ID3D11DeviceContext* dc)
 {
-	
 	//플레이어를 카메라에 바인딩....한건데 솔직히 너무 별로라 바꿔야될듯
 	/*XMFLOAT3 direction;
 	XMStoreFloat3(&direction, _mainCam.GetPosition());
@@ -405,6 +411,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
 
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, Island->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			Island->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+	
 	//BigTree
 	world = _sceneInfo->worldMatrix;
 //	world = XMMatrixRotationY(rotation);
@@ -418,6 +435,19 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, BigTree->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			BigTree->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//TreeHouse
 	world = _sceneInfo->worldMatrix;
 	static float translation = 0.0f;
@@ -441,6 +471,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, TreeHouse->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			TreeHouse->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//MintTree
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -453,6 +495,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, MintTree->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			MintTree->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//MintTree2
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -465,6 +519,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, MintTree2->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			MintTree2->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
 
 	//PurpleTree
 	world = _sceneInfo->worldMatrix;
@@ -479,6 +544,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
 
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PurpleTree->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PurpleTree->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//FlowerTree
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -492,6 +568,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
 
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, FlowerTree->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			FlowerTree->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//YellowTree
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -504,6 +591,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, YellowTree->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			YellowTree->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//YellowTree2
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -516,6 +615,19 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, YellowTree2->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			YellowTree2->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
+
 	//BigYellowTree
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -529,6 +641,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
 
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, BigYellowTree->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			BigYellowTree->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//RoundTree
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -541,6 +664,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, RoundTree->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			RoundTree->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//RoundTree2
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -553,6 +688,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, RoundTree2->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			RoundTree2->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//RoundTree3
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -565,6 +712,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, RoundTree3->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			RoundTree3->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
 
 	//Trees
 	world = _sceneInfo->worldMatrix;
@@ -579,6 +737,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
 
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, Trees->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			Trees->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//PalmTree
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -592,6 +761,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
 
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PalmTree->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PalmTree->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//PalmTree2
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -604,6 +784,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PalmTree2->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PalmTree2->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//PalmTree3
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -616,6 +808,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PalmTree3->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PalmTree3->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//PalmTree4
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -628,6 +832,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PalmTree4->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PalmTree4->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//PalmTree5
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -640,6 +856,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PalmTree5->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PalmTree5->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//PalmTree6
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -652,6 +880,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PalmTree6->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PalmTree6->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//PalmTree7
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -664,6 +904,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PalmTree7->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PalmTree7->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//PalmTree8
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -676,6 +928,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PalmTree8->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PalmTree8->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//PalmTree9
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -689,6 +953,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
 
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, PalmTree9->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			PalmTree9->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//Stone
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -701,6 +976,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, Stone->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			Stone->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//Stone2
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -713,6 +1000,18 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, Stone2->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			Stone2->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
+
 	//Stone3
 	world = _sceneInfo->worldMatrix;
 	world *= XMMatrixTranslation(0.0f, -15.0f, 0.0f);
@@ -725,6 +1024,17 @@ void TestScene::Render(ID3D11DeviceContext* dc)
 		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(),
 		spotDiffuseColor, lightPosition);
+
+	if (m_LightShader->GetPhong() ? false : true) {
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_BACK);
+		result = m_OutlineShader->Render(dc, Stone3->GetIndexCount(),
+			world, _sceneInfo->viewMatrix,
+			_sceneInfo->projectionMatrix,
+			Stone3->GetTexture(),
+			m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			_mainCam.GetPositionF(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		DEVICEMANAGER.ChangeCullMode(dc, D3D11_CULL_NONE);
+	}
 
 	if (INPUTMANAGER.GetShift() == 1.0f) {
 		m_LightShader->SetPhong(m_LightShader->GetPhong() ? false : true);

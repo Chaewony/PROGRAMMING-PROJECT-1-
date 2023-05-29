@@ -484,6 +484,19 @@ void DeviceManager::ChangeCullMode(D3D11_CULL_MODE mode)
 
 }
 
+void DeviceManager::ChangeCullMode(ID3D11DeviceContext* dc, D3D11_CULL_MODE mode)
+{
+	D3D11_RASTERIZER_DESC cmdesc;
+
+	ZeroMemory(&cmdesc, sizeof(D3D11_RASTERIZER_DESC));
+	cmdesc.FillMode = D3D11_FILL_SOLID;
+	cmdesc.FrontCounterClockwise = true;
+	cmdesc.CullMode = mode;
+
+	_device->CreateRasterizerState(&cmdesc, _rasterState.GetAddressOf());
+	dc->RSSetState(*_rasterState.GetAddressOf());
+}
+
 bool DeviceManager::ChangeSamplerAddrees(D3D11_TEXTURE_ADDRESS_MODE addMode)
 {
 	_sampleDesc.AddressU = addMode;

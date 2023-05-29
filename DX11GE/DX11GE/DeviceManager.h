@@ -60,6 +60,7 @@ public:
 	
 	//change face cull
 	void						ChangeCullMode(D3D11_CULL_MODE mode);
+	void						ChangeCullMode(ID3D11DeviceContext* dc, D3D11_CULL_MODE mode);
 	
 	//change texture mode
 	bool						ChangeSamplerAddrees(D3D11_TEXTURE_ADDRESS_MODE addMode);

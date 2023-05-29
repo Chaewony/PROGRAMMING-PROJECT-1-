@@ -162,6 +162,7 @@
     <ClCompile Include="modelclass.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="MYUTIL.cpp" />
+    <ClCompile Include="outlineshaderclass.cpp" />
     <ClCompile Include="ParticleShaderClass.cpp" />
     <ClCompile Include="ParticleSystemClass.cpp" />
     <ClCompile Include="pch.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="ModelStructure.h" />
     <ClInclude Include="MYUTIL.h" />
+    <ClInclude Include="outlineshaderclass.h" />
     <ClInclude Include="ParticleShaderClass.h" />
     <ClInclude Include="ParticleSystemClass.h" />
     <ClInclude Include="pch.h" />

@@ -17,6 +17,7 @@
 #include "rendertextureclass.h"
 #include "FogShaderClass.h"
 #include "Player.h"
+#include "outlineshaderclass.h"
 
 class TestScene : public GameNode
 {
@@ -71,6 +72,7 @@ private:
 	RenderTextureClass* m_RefractionTexture, * m_ReflectionTexture;
 	RefractionShaderClass* m_RefractionShader;
 	WaterShaderClass* m_WaterShader;
+	OutlineShaderClass* m_OutlineShader;
 	bool RenderRefractionToTexture(ID3D11DeviceContext* dc);
 	bool RenderReflectionToTexture(ID3D11DeviceContext* dc);
 	float m_waterHeight, m_waterTranslation;

@@ -141,6 +141,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>_Game</Filter>
     </ClCompile>
+    <ClCompile Include="outlineshaderclass.cpp">
+      <Filter>실험</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="systemclass.h">
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="outlineshaderclass.h">
+      <Filter>실험</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
